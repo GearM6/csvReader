@@ -16,10 +16,8 @@ int main(){
 
 	ifstream in1("Campers_Test.csv");
 	string line;
-	getline(in1, line);
 	while(cin.good()){
 		cout << line;
-		lines.push_back(line);
 		getline(in1, line);
 	}
 	cout << lines.size();
