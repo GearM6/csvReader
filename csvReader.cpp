@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <sstream>
+#include <locale>
 
 using namespace std;
 
@@ -15,10 +17,12 @@ int main(){
 
 	vector<string> lines;
 	ifstream file;
-	string line;
-<<<<<<< HEAD
+	string line, filePath;
 
-	file.open("campersList.csv");
+	cout << "Drag and drop the file you want to catalog: ";
+	cin >> filePath;
+	cout << endl;
+	file.open(filePath);
 	if (file.fail()){   cout << "Failed to open file.\n";   return 0;}
 	else{
 		getline(file,line);
@@ -26,51 +30,30 @@ int main(){
 			while(file.good()){
 				getline(file, line);
 				lines.push_back(line);
-				cout << line << endl;
 			}
-			cout << "Number of lines: " << lines.size() << endl;
+			cout << "Number of elements: " << lines.size() << endl;
 	    	file.close();
 		}
 		else{cout << "File not open, terminating program.\n";}
     }
-=======
-	cout << "Running\n";
-	getline(file,line);
-	while(file.good() && !file.eof()){
-		getline(file, line);
-		lines.push_back(line);
-		cout << line << endl;
-	}
-	cout << lines.size();
-    file.close();
-    
 
-
-    typedef std::tr1::unordered_map<int,unsigned int> CounterMap;
-	CounterMap counts;
-	for (int i = 0; i < lines.size(); ++i)
-	{
-   		CounterMap::iterator i(counts.find(lines[i]));
-   		if (i != counts.end()){
-      		i->second++;
-   		} else {
-      		counts[lines[i]] = 1;
-   		}
-	}
-
-
->>>>>>> origin/master
-	/*
-	string stringIn = "my,csv,,is 10233478,separated,by commas";
-	vector<std::string> commaSeparated(1);
-	int commaCounter = 0;
-	
-	for (int i=0; i<stringIn.size(); i++) {
-    if (stringIn[i] == ",") {
-        commaSeparated.push_back("");
-        commaCounter++;
-    } else {
-        commaSeparated.at(commaCounter) += stringIn[i];
+    map<string,string> grouping;
+    for (int i = 0; i < lines.size(); ++i)
+    {
+    	istringstream stream(lines[i]);
+    	string temp;
+    	vector<string> v;
+	    while(getline(stream,temp,',')){
+	    	int j = 0;
+	    	v.push_back(temp);
+	    	j++;
+	    }    
+	    grouping[v[0]] = v[4];
+	    cout << v[0] << "\n";
     }
-	*/
+
+    string input;
+    cout << "Enter the name you want to find: (type 'done' to quit)\n";
+    getline(cin, input);
+    cout << input << " is in group: " << grouping[input] << endl;
 }
