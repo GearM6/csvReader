@@ -13,20 +13,24 @@ int main(){
 	int maxMale;
 
 	vector<string> lines;
-
 	ifstream file;
-	file.open("Campers_Test.csv");
 	string line;
-	cout << "Running\n";
-	getline(file,line);
-	while(file.good() && !file.eof()){
-		getline(file, line);
-		lines.push_back(line);
-		cout << line << endl;
-	}
-	cout << lines.size();
-    file.close();
-    
+
+	file.open("campersList.csv");
+	if (file.fail()){   cout << "Failed to open file.\n";   return 0;}
+	else{
+		getline(file,line);
+		if(file.is_open()){
+			while(file.good()){
+				getline(file, line);
+				lines.push_back(line);
+				cout << line << endl;
+			}
+			cout << "Number of lines: " << lines.size() << endl;
+	    	file.close();
+		}
+		else{cout << "File not open, terminating program.\n";}
+    }
 	/*
 	string stringIn = "my,csv,,is 10233478,separated,by commas";
 	vector<std::string> commaSeparated(1);
