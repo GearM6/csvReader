@@ -54,6 +54,7 @@ int main(){
 
     string input;
     cout << "Enter the name you want to find: (type 'done' to quit)\n";
+    cin.ignore(1000, '\n');
     getline(cin, input);
     cout << input << " is in group: " << grouping[input] << endl;
 }
