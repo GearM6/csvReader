@@ -14,15 +14,19 @@ int main(){
 
 	vector<string> lines;
 
-	ifstream in1("Campers_Test.csv");
+	ifstream file;
+	file.open("Campers_Test.csv");
 	string line;
-	while(cin.good()){
-		cout << line;
-		getline(in1, line);
+	cout << "Running\n";
+	getline(file,line);
+	while(file.good() && !file.eof()){
+		getline(file, line);
+		lines.push_back(line);
+		cout << line << endl;
 	}
 	cout << lines.size();
-    in1.close();
-
+    file.close();
+    
 	/*
 	string stringIn = "my,csv,,is 10233478,separated,by commas";
 	vector<std::string> commaSeparated(1);
